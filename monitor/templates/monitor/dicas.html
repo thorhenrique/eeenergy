@@ -1,0 +1,25 @@
+<head>
+    <meta charset="utf-8">
+    <title>EEE - Dicas</title>
+
+</head>
+
+<body>
+    <h1>Dicas - veja as dicas mais atuais</h1>
+
+    {% if dicas %}
+        {% for dica in dicas %}
+            <table>
+                <tr>
+                    <td><strong>{{ dica.titulo }}</strong></td>
+                </tr>
+                <tr>
+                    <td>{{ dica.desc }}</td>
+                </tr>
+            </table>
+        {%endfor%}
+    {%else%}
+        <p>O sistema não possui dicas atualmente :(</p>
+    {%endif%}
+
+</body>

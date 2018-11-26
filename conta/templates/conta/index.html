@@ -1,0 +1,28 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>EEE - Meu Perfil</title>
+    
+</head>
+
+<body>
+    <h1>Meu Perfil</h1>
+
+    <table>
+        <tr>
+            <td>Nome: </td>
+            <td>{{ nome}}</td>
+        </tr>
+        <tr>
+            <td>Nome de usuario: </td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>Patente: </td>
+            <td>Economista Junior</td>
+        </tr>
+    </table>
+
+    <a href="{% url 'monitor:index'%}">Monitoramento dos gastos</a>
+    <a href='{% url 'conta:sair' %}' >Sair</a>
+</body>

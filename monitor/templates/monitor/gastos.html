@@ -1,0 +1,37 @@
+<head>
+    <meta charset="utf-8">
+    <title>EEE - Gastos</title>
+    
+</head>
+
+<body>
+    <div id='entrar_gasto'>
+        <h3>Entrar com novo registro de conta</h3>
+        <form action="{% url 'monitor:gastos' %}" method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            {{ form_gasto.as_p}}
+            <input type="submit" value="Registrar" />
+        </form>
+        {% if gasto_info != '' %}
+            <p><strong>{{gasto_info}}</strong></p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>Gastos semanais<h3>
+
+    </div>
+    <div>
+        <h3>Dicas para economizar mais energia</h3>
+        <table>
+                <tr>
+                    <td>Dica: </td>
+                    <td>{{ dica.titulo }}</td>
+                </tr>
+                <tr>
+                    <td>Desc: </td>
+                    <td>{{ dica.desc }}</td>
+                </tr>
+        </table>
+    </div>
+</body>

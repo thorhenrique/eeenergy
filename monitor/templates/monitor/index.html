@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>EEE - Monitor</title>
+    </head>
+    <body>
+        <h1>Bem vindo ao EEEnergy!!</h1>
+        <p>Nessa secção, serão mostrados seus gastos e dicas</p>
+
+        <div>
+            <ul>
+                <li><a href="{% url 'conta:index'%}">Ver sua conta</a></li>
+                <li><a href="{% url 'monitor:dicas'%}">Ver as dicas</a></li>
+                <li><a href="{% url 'monitor:gastos'%}" >Veja as medias dos seus gastos</a></li>
+            </ul>
+        </div>
+        {% if dica%}
+            <h2>Dica do Dia</h2>
+            <strong>{{ dica.titulo }}</strong> <br/>
+            {{ dica.desc }}
+        {% endif%}
+    </body>
+</html>
