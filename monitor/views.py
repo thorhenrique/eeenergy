@@ -69,9 +69,14 @@ def gastos(request):
     #Pegar duas dicas aleatorias
     dicas_all = Dica.objects.all()
     #media de gastos do usuario
+
     
     #Ultimo registro feito pelo usuario
-    ultimo_registro = Gasto.objects.latest()
+    try:
+        ultimo_registro = Gasto.objects.get(usuario__pk=request.session['user_id'])[:1]
+    except Gasto.DoesNotExist:
+        ultimo_registro = None
+    
     if ultimo_registro is not None:
         #A checagem sera semanal
         dia_para_registro = ultimo_registro.data.day + 7
@@ -92,6 +97,6 @@ def gastos(request):
     else:
         form_gasto = GastoForm()
 
-    context = {'form_gasto' : form_gasto,'gasto_info' : gasto_info,'ultimo_registro' : ultimo_registro, 'info' : info, 'dica' : random_dica }
+    context = {'form_gasto' : form_gasto,'gasto_info' : gasto_info,'ultimo_registro' : ultimo_registro, 'info' : info, }
     return render(request,'monitor/gastos.html',context)
 
