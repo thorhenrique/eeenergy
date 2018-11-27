@@ -4,18 +4,54 @@ from .models import Dica,Gasto
 from .forms import GastoForm
 from conta.models import Usuario
 from datetime import datetime
+from datetime import datetime
 import random
 # Create your views here.
 
 def index(request):
+    kwh = ''
+    g_dia = 0
+    g_hora = 0
+    g_semanal = 0
+    msg = ''
+    val = [] 
     #verifica se o usuario esta autenticado, caso o contrario, redireciona
     #a pagina de entrar
     if get_logged_user(request) == None:
         return redirect(reverse('conta:entrar'))
 
-    dica = Dica.objects.latest()
+    dicas = Dica.objects.latest()
+    try:
+        gastos = Gasto.objects.filter(usuario__pk=request.session['user_id'])
+        msg= 'Seus gastos'
 
-    return render(request,'monitor/index.html',{'dica' : dica})
+        for dica in dicas:
+            now = datetime.now()
+        
+            if dica.data.month == now.month:
+                val.append[dica.gasto]
+            else:
+                continue
+        
+    except:
+        msg = 'Você não possui gastos'
+    
+    if val != 0:
+        g_dia = sum(val)/30
+        g_hora = (sum(val)/30)/24
+        g_semanal = sum(val)/4
+    else:
+        msg = 'Você não possui gastos!'
+
+
+    context = {
+        'dica' : dicas,
+        'g_hora' : g_hora,
+        'g_dia' : g_dia,
+        'g_semanal' : g_semanal,   
+    }
+
+    return render(request,'monitor/index.html',context)
 
 def dicas(request):
     if get_logged_user(request) == None:
@@ -32,10 +68,6 @@ def gastos(request):
     info = ''
     #Pegar duas dicas aleatorias
     dicas_all = Dica.objects.all()
-    #Escolher uma dica aleatoria dos objetos
-    diclist = Dica.objects.values_list('pk', flat=True)
-    random_id_dica = random.randint(0, len(diclist))
-    random_dica = Dica.objects.get(pk=diclist[random_id_dica])
     #media de gastos do usuario
     
     #Ultimo registro feito pelo usuario
@@ -62,3 +94,4 @@ def gastos(request):
 
     context = {'form_gasto' : form_gasto,'gasto_info' : gasto_info,'ultimo_registro' : ultimo_registro, 'info' : info, 'dica' : random_dica }
     return render(request,'monitor/gastos.html',context)
+

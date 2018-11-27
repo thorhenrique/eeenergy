@@ -19,7 +19,7 @@ class Gasto(models.Model):
     usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     data = models.DateField("Data", default=datetime.now)
     gasto = models.FloatField("Gasto em Reais", default=0)
-    kw = models.FloatField("Kw's gastos",default=0)
+    kw = models.FloatField("Kilowatts's gastos",default=0)
 
     class Meta:
         get_latest_by = 'data'

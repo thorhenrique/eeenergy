@@ -28,4 +28,8 @@ class Usuario(models.Model):
             return True
         else:
             return False
+        
+    
+    def __str__(self):
+        return self.nome
 
