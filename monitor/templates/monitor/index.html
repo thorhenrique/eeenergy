@@ -9,11 +9,24 @@
         <h1>Bem vindo ao EEEnergy!!</h1>
         <p>Nessa secção, serão mostrados seus gastos e dicas</p>
 
+        <h1>Gastos</h1>
+        <table>
+            <tr>
+                <th>Diario</th>
+                <th>Semanal</th>
+                <th>Mensal</th>
+            </tr>
+            <tr>
+                <td>{{ g_dia }}</td>
+                <td>{{ g_semanal }}</td>
+                <td>{{ g_mes }}</td>
+            </tr>
+        </table>
+
         <div>
             <ul>
                 <li><a href="{% url 'conta:index'%}">Ver sua conta</a></li>
                 <li><a href="{% url 'monitor:dicas'%}">Ver as dicas</a></li>
-                <li><a href="{% url 'monitor:gastos'%}" >Veja as medias dos seus gastos</a></li>
             </ul>
         </div>
         {% if dica%}

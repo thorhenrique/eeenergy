@@ -18,7 +18,20 @@
     </div>
 
     <div>
-        <h3>Gastos semanais<h3>
+        <h3>Gastos<h3>
+            <h4>{{ msg }}</h4>
+            <table>
+                <tr>
+                    <th>Gasto diario</th>
+                    <th>Gasto Semanal</th>
+                    <th>Gasto Mensal</th>
+                </tr>
+                <tr>
+                    <td>{{ g_dia }}</td>
+                    <td>{{ g_semana }}</td>
+                    <td>{{ g_mes }}</td>
+                </tr>
+            </table>
 
     </div>
     <div>

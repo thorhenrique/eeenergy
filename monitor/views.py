@@ -73,13 +73,13 @@ def gastos(request):
     
     #Ultimo registro feito pelo usuario
     try:
-        ultimo_registro = Gasto.objects.get(usuario__pk=request.session['user_id'])[:1]
+        ultimo_registro = Gasto.objects.filter(usuario__pk=request.session['user_id'])[:1]
     except Gasto.DoesNotExist:
         ultimo_registro = None
     
     if ultimo_registro is not None:
         #A checagem sera semanal
-        dia_para_registro = ultimo_registro.data.day + 7
+        dia_para_registro = ultimo_registro[0].data.day + 7
 
         #checar o dia atual, se o dia atual for igual a soma do dia do ultimo
         #registro mais 7, está na hora de fazer outro registro
