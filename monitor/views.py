@@ -14,7 +14,7 @@ def index(request):
     g_hora = 0
     g_semanal = 0
     msg = ''
-    val = [] 
+    val = 0 
     #verifica se o usuario esta autenticado, caso o contrario, redireciona
     #a pagina de entrar
     if get_logged_user(request) == None:
@@ -25,11 +25,11 @@ def index(request):
         gastos = Gasto.objects.filter(usuario__pk=request.session['user_id'])
         msg= 'Seus gastos'
 
-        for dica in dicas:
+        for gasto in gastos:
             now = datetime.now()
         
-            if dica.data.month == now.month:
-                val.append[dica.gasto]
+            if gasto.data.month == now.month:
+                val += gasto.kw
             else:
                 continue
         
@@ -37,9 +37,9 @@ def index(request):
         msg = 'Você não possui gastos'
     
     if val != 0:
-        g_dia = sum(val)/30
-        g_hora = (sum(val)/30)/24
-        g_semanal = sum(val)/4
+        g_dia = val/30
+        g_hora = (val/30)/24
+        g_semanal = val/4
     else:
         msg = 'Você não possui gastos!'
 
