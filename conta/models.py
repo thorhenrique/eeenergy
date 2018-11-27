@@ -15,13 +15,7 @@ class Usuario(models.Model):
 
     #Funcao para definir a senha do usuario
     def set_pass(self,senha,salt=None):
-        if salt == None:
-            self.salt = "".join(random.choice(string.ascii_letters+string.digits, k=16))
-        else:
-            self.salt = str(salt)
-
-        self.senha = make_password(senha,salt=self.salt)
-        return
+        self.senha = senha
 
     def cmp_senha(self,senha):
         if make_password(senha,self.salt) == self.senha:
